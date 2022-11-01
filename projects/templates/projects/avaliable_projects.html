@@ -1,0 +1,48 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<header>
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <!-- Navbar -->
+ </header>
+<body><br>
+<br>
+ <h3 class="h-100 d-flex align-items-center justify-content-center text inline"> DONATE FOR A PROJECT </h3>
+ <br>
+<div class="h-100 d-flex align-items-center justify-content-center"> <a href="{% url 'create_project'%}"><button type="button" class="btn btn-primary">Create Project</button></a>
+</div>
+ <br>
+<br>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Details</th>
+      <th scope="col">Total Donations</th>
+      <th scope="col">More Options</th>
+    </tr>
+  </thead>
+    <tbody>
+  {% for value in projects.values %}
+    <tr>
+      <th scope="row">{{value.title}}</th>
+      <td>{{value.end_date}}</td>
+      <td>{{value.details}}</td>
+      <td>{{value.total_donate}}</td>
+      <td>
+      <a href="{% url 'donate' value.id  %}"> <button type="button" class="btn btn-success">Donate</button></a>
+        <a href="{% url 'single_proj' value.id  %}"> <button type="button" class="btn btn-info">More Details</button> </a>
+      </td>
+    </tr>
+      {% endfor %}
+
+  </tbody>
+</table>
+
+</body>
+
+{%endblock %}

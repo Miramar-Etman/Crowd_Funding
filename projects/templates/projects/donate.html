@@ -1,0 +1,27 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+  <header>
+    {% if messages %}
+{% for message in messages %}
+    <div class="alert alert-danger font-weight-bold" role="alert">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <!-- Navbar -->
+  </header>
+<div class="container py-5">
+  <h1>Donate For {{project_donate.title}}</h1>
+    <h3>Total Amount Needed</h3>
+
+ <button class="badge-warning" type="">{{project_donate.target}}</button>
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <br>
+    <button class="btn btn-primary" type="submit">DONATE</button>
+  </form>
+</div>
+
+{% endblock %}

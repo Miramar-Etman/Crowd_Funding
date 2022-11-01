@@ -1,0 +1,27 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-danger font-weight-bold" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+{% load static %}
+<header>
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <!-- Navbar -->
+ </header>
+<br>
+
+<div class="container" >
+	<h1 ><span class="badge badge-dark lg">Register</span></h1>
+	<form method="POST" action="" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form|crispy }}
+		{{ profile|crispy }}
+		<br>
+			<button class="btn btn-primary" type="submit">Register</button>
+	</form>
+	<p class="text-center">If you already have an account, <a href="login">login</a> instead.</p>
+</div>
+{%endblock%}

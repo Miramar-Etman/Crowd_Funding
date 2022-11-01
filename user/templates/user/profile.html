@@ -1,0 +1,101 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-info font-weight-bold" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+{% load static %}
+<header>
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+
+    <!-- Navbar -->
+ </header>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+ <div style="color:white;" class="container w-50 p-3">
+    <h2 class="text-uppercase" style="text-align:center">{{user.username}}</h2>
+     {% if profile.profile_pic %}
+  <img class="rounded-circle card" src="{{profile.profile_pic.url}}" alt="John" style="width:100%">
+     {% endif %}
+  <h1>PhoneNum: {{profile.mobile_number}}</h1>
+  <p class="title">SocialProfile: {{profile.social_profile}}</p>
+ <a href="{% url 'delete' %}"> <button type="button" class="btn btn-danger">DELETE ACCOUNT</button> </a>
+ </div>
+<div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card p-0">
+                    <div class="card-image">
+                        <img src="https://butterbraid.com/wp-content/uploads/2021/09/running-an-online-fundraiser.jpg"
+                            alt="Fund a Project">
+                    </div>
+                    <div class="card-content d-flex flex-column align-items-center">
+                       <a href="{% url 'avaliable_proj' %}"><h4 class="pt-2 text-dark">FUND A PROJECT</h4></a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card p-0">
+                    <div class="card-image">
+                        <img src="https://blog.hubbado.com/content/images/2020/01/projectmanager.png"
+                            alt="">
+                    </div>
+                    <div class="card-content d-flex flex-column align-items-center">
+                      <a href="{% url 'show_projects' %}"><h4 class="pt-2 text-dark">View Your Projects</h4></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card p-0">
+                    <div class="card-image text-dark">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa0hAw93AjGDrwSc4FvIXI_30Y4vJiyEss_Oz8cqUZWY_WvnuRjcyuaYf_0zDeSM9URQ0&usqp=CAU"
+                            alt="">
+                    </div>
+                    <div class="card-content d-flex flex-column align-items-center">
+                       <a href="{% url 'edit_profile' %}"><h4 class="pt-2 text-dark">Edit Profile</h4></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

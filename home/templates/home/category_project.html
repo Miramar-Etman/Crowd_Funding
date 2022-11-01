@@ -1,0 +1,23 @@
+<br> <br>
+
+<h1 class="text-center mb-5"> AVALIABLE PROJECTS CATEGORIES </h1>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">CATEGORY</th>
+      <th scope="col">SEE MORE PROJECTS</th>
+    </tr>
+  </thead>
+    <tbody>
+    <tr>
+        {% for value in categories.values %}
+      <th scope="row">{{value.label}}</th>
+      <td>
+                <a href="{% url 'proj_category' value.id  %}"> <button type="button" class="btn btn-info">More Details</button> </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>

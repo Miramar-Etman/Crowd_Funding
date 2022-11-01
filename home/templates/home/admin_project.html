@@ -1,0 +1,26 @@
+{% if projects_admin %}
+  <h1 class="text-center mb-5">FEATURED PROJECTS </h1>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Target Money</th>
+      <th scope="col">SEE MORE PROJECTS</th>
+    </tr>
+  </thead>
+    <tbody>
+    <tr>
+        {% for value in projects_admin.values %}
+      <th scope="row">{{value.title}}</th>
+      <td>{{value.end_date}}</td>
+          <td>{{value.target}}</td>
+      <td>
+                <a href="{% url 'single_proj' value.id  %}"> <button type="button" class="btn btn-info">More Details</button> </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+</body>

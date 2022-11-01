@@ -1,0 +1,49 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<header>
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <!-- Navbar -->
+ </header>
+    {% if messages %}
+{% for message in messages %}
+    <div class="alert alert-danger font-weight-bold" role="alert">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+<body><br>
+<br>
+ <h3 class="h-100 d-flex align-items-center justify-content-center text inline">  YOUR SEARCH RESULT </h3>
+ <br>
+<br>
+{% if projects %}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Details</th>
+      <th scope="col">More Options</th>
+    </tr>
+  </thead>
+    <tbody>
+
+  {% for value in projects.values %}
+    <tr>
+      <th scope="row">{{value.title}}</th>
+      <td>{{value.end_date}}</td>
+      <td>{{value.details}}</td>
+      <td><a href="{% url 'single_proj' value.id  %}"> <button type="button" class="btn btn-info">More Details</button> </a>
+</td>
+    </tr>
+      {% endfor %}
+
+  </tbody>
+</table>
+</body>
+{% else %}
+ <h3 class="h-100 d-flex align-items-center justify-content-center text inline">  Seems Like Your Search didnot match any Current Project </h3>
+{% endif %}
+
+{%endblock %}

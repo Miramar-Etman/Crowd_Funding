@@ -1,0 +1,93 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<header>
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <!-- Navbar -->
+ </header>
+<body><br>
+<br>
+ <h3 class="h-100 d-flex align-items-center justify-content-center text inline"> DONATE FOR A PROJECT </h3>
+ <br>
+      {% if user.is_authenticated %}
+<div class="h-100 d-flex align-items-center justify-content-center"> <a href="{% url 'create_project'%}"><button type="button" class="btn btn-primary">Create Project</button></a>
+</div>
+{% endif %}
+ <br>
+<br>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">Create Date</th>
+      <th scope="col">Category</th>
+      <th scope="col">Project Creator</th>
+      <th scope="col">Target Money</th>
+      <th scope="col">Details</th>
+      {% if user.is_authenticated %}
+      <th scope="col">DONATE</th>
+      <th scope="col">RATE</th>
+      {% endif %}
+      <th scope="col">SEE MORE PROJECTS</th>
+    </tr>
+  </thead>
+    <tbody>
+    <tr>
+      <th scope="row">{{project.title}}</th>
+      <td>{{project.end_date}}</td>
+        <td>{{project.start_date}}</td>
+        <td>{{project.create_date}}</td>
+        <td>{{project.Category}}</td>
+        <td>{{project.project_creator}}</td>
+      <td>{{project.target}}</td>
+      <td>{{project.details}}</td>
+
+      {% if user.is_authenticated %}
+      <td>
+      <a href="{% url 'donate' project.id  %}"> <button type="button" class="btn btn-success">Donate</button> </a>
+      </td>
+      <td>
+        <a href="{% url 'add_rate' project.id %}" > <button type="button" class="btn btn-secondary">Rate</button> </a>
+      </td>
+      {% endif %}
+            <td>
+              <a href="{% url 'avaliable_proj' %}" > <button type="button" class="btn btn-info">More Projects</button> </a>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</body>
+{% if user.is_authenticated %}
+<div class="container">
+<h2 > Comments Section </h2>
+{% if not project.comments.all %}
+  No comments Yet .....  <a href="{% url 'add_comment' project.pk %}">Add Comment</a>
+Add One</a>
+{% else %}
+  <a href="{% url 'add_comment' project.pk %}">Add Comment</a>
+Add Comment</a>
+<br> <br>
+{% for comment in project.comments.all %}
+<strong>
+  {{comment.name}}
+  {{comment.date_added}}
+</strong>
+<br>
+{{comment.body}}
+<br><br>
+{% endfor %}
+{% endif %}
+  <br> <br>
+  <a href="{% url 'add_comment' project.pk %}">Add Comment</a>
+  </div>
+
+{% endif %}
+{%endblock %}

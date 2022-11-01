@@ -1,0 +1,143 @@
+{% extends "home/header.html" %}
+{% load static %}
+{% block content %}
+<header>
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <!-- Navbar -->
+ </header>
+<br> <br>
+<body>
+<div class="container">
+  <h1> SEARCH FOR A PROJECT </h1>
+     <div class="input-group">
+  <form method="POST"  action="{% url 'search'  %}" class="form-outline">
+    {%csrf_token%}
+    <input type="search" id="form1"  name="searched" class="form-control" />
+              <br> <br>
+  <a href="{% url 'search'  %}"><button type="submit" class="btn btn-primary"> SEARCH
+    <i class="fas fa-search"></i>
+  </button> </a>
+      </form>
+</div>
+</div>
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-success font-weight-bold" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="mt-5">
+    <div class="container">
+          {% include 'home/highest_projects_slider.html' %}
+      <!--Section: Content-->
+
+      <section>
+        <div class="row">
+          <div class="col-md-6 gx-5 mb-4">
+            <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+              <img src="https://people.com/thmb/RpfLXVn7sSEYg_aSKiRNi2-2jI8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(704x569:706x571):format(webp)/gofundme-03e73f1fe41049309b7fba0dd4e57a0e.jpg" class="img-fluid" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-6 gx-5 mb-4">
+            <br> <br> <br> <br><br> <br>
+            <h4><strong>GoFundMe Orgaization</strong></h4>
+            <p class="text-muted">
+              GoFundMe is an American for-profit crowdfunding platform that allows people
+              to raise money for events ranging from life events such as celebrations
+              and graduations to challenging circumstances like accidents
+              and illnesses.            </p>
+            <p><strong>How GoFundMe Works?</strong></p>
+            <p class="text-muted">
+              GoFundMe gets your funds to you quickly because we know that many
+              fundraising needs are time-sensitive. You can set up withdrawals and
+              add your bank account as soon as you accept the campaign organizer's
+              invitation to make you a beneficiary. Bank transfers then take 2-5 business
+              days to arrive.            </p>
+          </div>
+        </div>
+      </section>
+            {% include 'home/latest.html' %}
+            {% include 'home/admin_project.html' %}
+            {% include 'home/category_project.html' %}
+
+      <!--Section: Content-->
+      <hr class="my-5" />
+
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-5"><strong>GoMeFund</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-12 mb-4">
+            <div class="card">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="https://miro.medium.com/max/1200/1*4XRAX4obUOvMVqWibVCneQ.jpeg" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the
+                  card's content.
+                </p>
+                <a href="#!" class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="https://i0.wp.com/cfo-linkapil.org.ph/wp-content/uploads/2018/11/school2-minn.jpg?resize=960%2C721&ssl=1" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the
+                  card's content.
+                </p>
+                <a href="#!" class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="https://i0.wp.com/cfo-linkapil.org.ph/wp-content/uploads/2018/11/school4-minn.jpg?resize=960%2C720&ssl=1" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"> See Avaliable Projects</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the
+                  card's content.
+                </p>
+                <a href="" class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Section: Content-->
+
+      <hr class="my-5" />
+
+
+    </div>
+  </main>
+</body>
+{%endblock%}

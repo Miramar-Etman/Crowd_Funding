@@ -1,0 +1,51 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<header>
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <!-- Navbar -->
+ </header>
+    {% if messages %}
+{% for message in messages %}
+    <div class="alert alert-danger font-weight-bold" role="alert">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+<body><br>
+<br>
+ <h3 class="h-100 d-flex align-items-center justify-content-center text inline"> PREVIOUS DONATIONS PROJECTS </h3>
+ <br>
+<div class="h-100 d-flex align-items-center justify-content-center"> <a href="{% url 'create_project'%}"><button type="button" class="btn btn-primary">Create Project</button></a>
+</div>
+ <br>
+<br>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">User</th>
+      <th scope="col">Project</th>
+      <th scope="col">Amount Donated</th>
+      <th scope="col">More Options</th>
+    </tr>
+  </thead>
+    <tbody>
+  {% for value in donations %}
+    <tr>
+      <th scope="row">{{value.user_donated}}</th>
+      <td>{{value.amount}}</td>
+      <td>{{value.project}}</td>
+
+      <td>
+    <a href="{% url 'single_proj' value.project_id %}"> <button type="button" class="btn btn-info">More Details</button></a> </td>
+
+    </tr>
+      {% endfor %}
+
+  </tbody>
+</table>
+
+</body>
+
+{%endblock %}
