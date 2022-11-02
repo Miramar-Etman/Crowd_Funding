@@ -39,7 +39,7 @@ class Project(models.Model):
 class Donate(models.Model):
     amount = models.PositiveIntegerField()
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="donate",blank=True)
+    Project, on_delete=models.CASCADE, related_name="donate",blank=True)
     user_donated = models.ForeignKey(User, on_delete= models.CASCADE,default=None, related_name="donate",blank=True)
     def __str__(self):
         return str(self.amount)
@@ -62,7 +62,6 @@ class Comment(models.Model):
 class Rating(models.Model):
     scale = models.PositiveIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)])
-
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="ratings")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)

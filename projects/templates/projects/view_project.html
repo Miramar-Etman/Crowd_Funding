@@ -10,6 +10,7 @@
 <body><br>
 <br>
  <h3 class="h-100 d-flex align-items-center justify-content-center text inline"> DONATE FOR A PROJECT </h3>
+ <h3 class="h-100 d-flex align-items-center justify-content-center text inline"> AVERAGE PROJECT RATE: {{average_rate}} </h3>
  <br>
       {% if user.is_authenticated %}
 <div class="h-100 d-flex align-items-center justify-content-center"> <a href="{% url 'create_project'%}"><button type="button" class="btn btn-primary">Create Project</button></a>

@@ -10,7 +10,6 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import Category, Project, Donate, Comment, Rating
 from .forms import ProjectForm, DonateForm, CommentForm, RateForm, ReportProjectForm
 
-
 ####################Create Project######################
 @login_required
 def create_project(request):
@@ -52,7 +51,16 @@ def avaliable_all(request):
 ####################3 single project details #######################333
 def single_project(request,id):
     project = get_object_or_404(Project, id=id)
-    context = {"project": project}
+
+      #####   Average rate for project ######
+    average_rate = 0
+    if Rating.objects.filter(project=project):
+        rate_proj=str(Rating.objects.filter(project=project)[0])
+        for rate in rate_proj:
+            average_rate += int(rate)
+        average_rate /= len(rate_proj)
+
+    context = {"project": project,"average_rate":average_rate}
     return render(request, 'projects/view_project.html', context)
 
 ##################### Donation for specific project #################
