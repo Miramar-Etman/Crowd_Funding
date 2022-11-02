@@ -1,5 +1,6 @@
 from django import forms
-from .models import Project, Donate, Comment, Rating
+from .models import Project, Donate, Comment, Rating, CommentReport, ProjectReport
+
 
 ################# Create Project Form ######################
 class ProjectForm(forms.ModelForm):
@@ -28,5 +29,11 @@ class RateForm(forms.ModelForm):
 ######################## Reporting Project Form ###################
 class ReportProjectForm(forms.ModelForm):
     class Meta:
-        model = Rating
-        fields = ['scale']
+        model = ProjectReport
+        fields = ['reason']
+
+######################## Reporting Comment Form ###################
+class ReportCommentForm(forms.ModelForm):
+    class Meta:
+        model = CommentReport
+        fields = ['reason']

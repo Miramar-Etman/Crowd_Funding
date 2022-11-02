@@ -83,7 +83,7 @@ class ProjectReport(models.Model):
 ################### Reporting Comments #################
 class CommentReport(models.Model):
     reason = models.TextField(max_length=2000)
-    comment = models.ForeignKey(Project, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     user_report = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     def __str__(self):
         return str(self.reason)

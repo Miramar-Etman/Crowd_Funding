@@ -1,0 +1,27 @@
+{% extends "home/header.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+  <header>
+    {% if messages %}
+{% for message in messages %}
+    <div class="alert alert-danger font-weight-bold" role="alert">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <!-- Navbar -->
+  </header>
+<!--Login-->
+<div class="container py-5">
+  <h1>Reporting Cooment</h1>
+  <form method="POST" action="">
+    {% csrf_token %}
+    <br>
+      <div><label> Enter Your Reason for Reporting: </label> <br> {{ form.reason}}</div> <br>
+    <br>
+    <button class="btn btn-primary" type="submit">Report</button>
+  </form>
+
+</div>
+
+{% endblock %}

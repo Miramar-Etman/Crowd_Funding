@@ -8,7 +8,8 @@ from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Category, Project, Donate, Comment, Rating
-from .forms import ProjectForm, DonateForm, CommentForm, RateForm, ReportProjectForm
+from .forms import ProjectForm, DonateForm, CommentForm, RateForm, ReportProjectForm, ReportCommentForm
+
 
 ####################Create Project######################
 @login_required
@@ -180,7 +181,7 @@ def search_project(request):
         return render(request, 'projects/search_result.html')
 
 
-###################### Reporting Projec ##################
+###################### Reporting Project ##################
 @login_required
 def report_project(request,pk):
     if request.method == 'POST':
@@ -194,7 +195,7 @@ def report_project(request,pk):
             return redirect("avaliable_proj")
         context = {
             'form': form}
-        return render(request, 'projects/create_project.html', context)
+        return render(request, 'projects/report_project.html', context)
     else:
 
         form = ReportProjectForm()
@@ -202,3 +203,27 @@ def report_project(request,pk):
             'form': form,
         }
     return render(request, 'projects/report_project.html', context)
+
+###################### Reporting Commets ##################
+@login_required
+def report_comment(request,pk):
+    if request.method == 'POST':
+        form = ReportCommentForm(request.POST)
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.user_report = request.user
+            comment = Comment.objects.get(pk=pk)
+            new_form.comment = comment
+            new_form.save()
+            return redirect("avaliable_proj")
+        context = {
+            'form': form}
+        return render(request, 'projects/report_comment.html', context)
+
+    else:
+
+        form = ReportProjectForm()
+        context = {
+            'form': form,
+        }
+    return render(request, 'projects/report_comment.html', context)

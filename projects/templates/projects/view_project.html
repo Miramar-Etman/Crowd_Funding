@@ -80,6 +80,8 @@ Add Comment</a>
 <strong>
   {{comment.name}}
   {{comment.date_added}}
+  <a href="{% url 'report_comment' comment.pk %}  " > <button type="button" class="btn btn-danger">Report</button> </a>
+
 </strong>
 <br>
 {{comment.body}}

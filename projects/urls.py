@@ -17,4 +17,5 @@ urlpatterns = [
     path('donations', views.donations, name='donations'),
     path('view_search', views.search_project, name='search'),
     path('<int:pk>/report_project', views.report_project, name='report_project'),
+    path('<int:pk>/report_comment', views.report_comment, name='report_comment'),
               ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
