@@ -29,7 +29,6 @@ class Project(models.Model):
     target = models.PositiveIntegerField()
     total_donate = models.PositiveIntegerField(blank=True,default=0)
     is_featured = models.BooleanField(default=False)
-    #comments = GenericRelation(Comment)
     def __str__(self):
         return str(self.title)
 
@@ -73,3 +72,19 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = ('project', 'user',)
+
+###################### Reporting Project ###################
+class ProjectReport(models.Model):
+    reason = models.TextField(max_length=2000)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name="proj_rep")
+    user_report = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    def __str__(self):
+        return str(self.reason)
+
+################### Reporting Comments #################
+class CommentReport(models.Model):
+    reason = models.TextField(max_length=2000)
+    comment = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user_report = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    def __str__(self):
+        return str(self.reason)

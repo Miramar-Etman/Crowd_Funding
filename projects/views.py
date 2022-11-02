@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Category, Project, Donate, Comment, Rating
-from .forms import ProjectForm, DonateForm, CommentForm, RateForm
+from .forms import ProjectForm, DonateForm, CommentForm, RateForm, ReportProjectForm
 
 
 ####################Create Project######################
@@ -170,3 +170,27 @@ def search_project(request):
         return render(request, 'projects/search_result.html', context)
     else:
         return render(request, 'projects/search_result.html')
+
+
+###################### Reporting Projec ##################
+@login_required
+def report_project(request,pk):
+    if request.method == 'POST':
+        form = ReportProjectForm(request.POST)
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.user_report = request.user
+            project = Project.objects.get(pk=pk)
+            new_form.project = project
+            new_form.save()
+            return redirect("avaliable_proj")
+        context = {
+            'form': form}
+        return render(request, 'projects/create_project.html', context)
+    else:
+
+        form = ReportProjectForm()
+        context = {
+            'form': form,
+        }
+    return render(request, 'projects/report_project.html', context)

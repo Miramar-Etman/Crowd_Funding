@@ -36,6 +36,8 @@
       <td>
       <a href="{% url 'donate' value.id  %}"> <button type="button" class="btn btn-success">Donate</button></a>
         <a href="{% url 'single_proj' value.id  %}"> <button type="button" class="btn btn-info">More Details</button> </a>
+        <a href="{% url 'report_project' value.id  %}"><button type="button" class="btn btn-danger">Report</button></a>
+
       </td>
     </tr>
       {% endfor %}
