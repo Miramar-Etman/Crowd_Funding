@@ -22,7 +22,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 def register_user(request):
 	if request.method == "POST":
 		form = RegisterForm(request.POST)
-		profile_form = UserProfileCreate(request.POST)
+		profile_form = UserProfileCreate(request.POST,request.FILES, instance=request.user.profile)
 		if form.is_valid() and profile_form.is_valid() :
 			user = form.save(commit=False)
 			profile= profile_form.save(commit=False)
