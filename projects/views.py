@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Category, Project, Donate, Comment, Rating
+from .models import Category, Project, Donate, Comment, Rating, Photo
 from .forms import ProjectForm, DonateForm, CommentForm, RateForm, ReportProjectForm, ReportCommentForm
 
 
@@ -16,11 +16,14 @@ from .forms import ProjectForm, DonateForm, CommentForm, RateForm, ReportProject
 def create_project(request):
     categories = Category.objects.all()
     if request.method == 'POST':
+        images = request.FILES.getlist('images')
         form = ProjectForm(request.POST)
         if form.is_valid():
             new_form = form.save(commit=False)
             new_form.project_creator = request.user
             new_form.save()
+            for image in images:
+                Photo.objects.create(image=image, project=new_form)
             return redirect("show_projects")
         context = {
             'form': form,
@@ -52,7 +55,7 @@ def avaliable_all(request):
 ####################3 single project details #######################333
 def single_project(request,id):
     project = get_object_or_404(Project, id=id)
-
+    images = Photo.objects.filter(project=project)
       #####   Average rate for project ######
     average_rate = 0
     if Rating.objects.filter(project=project):
@@ -60,8 +63,7 @@ def single_project(request,id):
         for rate in rate_proj:
             average_rate += int(rate)
         average_rate /= len(rate_proj)
-
-    context = {"project": project,"average_rate":average_rate}
+    context = {"project": project,"average_rate":average_rate,"images":images}
     return render(request, 'projects/view_project.html', context)
 
 ##################### Donation for specific project #################

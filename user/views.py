@@ -32,7 +32,6 @@ def register_user(request):
 			profile.user = user
 			profile.save()
 			messages.success(request, "Registration successful." )
-			# to get the domain of the current site
 			current_site = get_current_site(request)
 			mail_subject = 'Activation link has been sent to your email id'
 			message = render_to_string('user/acc_active_email.html', {
@@ -47,7 +46,6 @@ def register_user(request):
 			)
 			email.send()
 			return HttpResponse('Please confirm your email address to complete the registration')
-		#login(request,user)
 		else:
 			messages.error(request, "Unsuccessful Registration. Invalid Information.")
 			return render(request,"user/register.html",{"form":form,"profile":profile_form})

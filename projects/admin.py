@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Project, Donate, Comment, Rating, ProjectReport, CommentReport
+from .models import Category, Project, Donate, Comment, Rating, ProjectReport, CommentReport, Photo
 
 # Register your models here.
 admin.site.register(Category)
@@ -9,3 +9,4 @@ admin.site.register(Comment)
 admin.site.register(Rating)
 admin.site.register(ProjectReport)
 admin.site.register(CommentReport)
+admin.site.register(Photo)

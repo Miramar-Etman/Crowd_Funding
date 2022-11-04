@@ -24,7 +24,6 @@ class Project(models.Model):
     create_date = models.DateTimeField(blank=True,default=datetime.datetime.now())
     project_creator = models.ForeignKey(User, on_delete=models.CASCADE,default=None,blank=True, related_name="project")
     Category = models.ForeignKey(Category, on_delete=models.PROTECT,related_name="category")
-    images = models.ImageField(null=True,blank=True,upload_to='media/')
     tags = TaggableManager(blank=True)
     target = models.PositiveIntegerField()
     total_donate = models.PositiveIntegerField(blank=True,default=0)
@@ -34,7 +33,12 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('show_projects')
-
+###################### Class Photo ###############################
+class Photo(models.Model):
+    project =models.ForeignKey(Project, on_delete=models.CASCADE, related_name="project",blank=True)
+    image = models.ImageField(null=True,blank=False,upload_to='media/',default='media/media/istockphoto-913374922-612x612.jpg')
+    def __str__(self):
+        return str(self.image)
 #####################Model Donations for projects #################
 class Donate(models.Model):
     amount = models.PositiveIntegerField()

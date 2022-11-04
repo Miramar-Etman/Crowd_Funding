@@ -6,7 +6,7 @@ from .models import Project, Donate, Comment, Rating, CommentReport, ProjectRepo
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title', 'details', 'start_date','end_date', 'Category','images','target','tags']
+        fields = ['title', 'details', 'start_date','end_date', 'Category','target','tags']
 
 ##################### Donations Form #######################
 class DonateForm(forms.ModelForm):
